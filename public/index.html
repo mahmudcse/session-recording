@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Network call demo</title>
+
+  <!-- The recorder. Must be the first script so it hooks fetch/XHR before anything else runs. -->
+  <script src="js/recorder.js" data-endpoint="/collect"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="bar">
+    <h1>Network call demo</h1>
+    <a id="viewer-link" class="button primary" href="viewer.html" target="_blank">See what was captured</a>
+  </header>
+
+  <main>
+    <p class="lead">
+      This page fires a mix of network calls on its own once it loads. <code>js/recorder.js</code>
+      captures all of them and posts them to <code>/collect</code>, where they are saved to the database.
+    </p>
+
+    <section>
+      <h2>Fire more calls</h2>
+      <div class="actions">
+        <button data-action="ajax">jQuery AJAX</button>
+        <button data-action="fetches">fetch()</button>
+        <button data-action="images">Images &amp; pixels</button>
+        <button data-action="cdn">CDN script + CSS</button>
+        <button data-action="tag">Inject third-party tag</button>
+        <button data-action="beacon">sendBeacon</button>
+        <button data-action="frames">Iframes</button>
+        <button data-action="sockets">WebSocket + SSE</button>
+        <button data-action="polling">Polling</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Images</h2>
+      <div id="gallery" class="gallery">
+        <!-- Static markup: requested by the HTML parser, no script involved. -->
+        <img src="https://picsum.photos/seed/static1/160/100" alt="">
+        <img src="https://picsum.photos/seed/static2/160/100" alt="">
+      </div>
+    </section>
+
+    <section>
+      <h2>Iframes</h2>
+      <div id="frames" class="frames"></div>
+    </section>
+
+    <section>
+      <h2>What this page triggered</h2>
+      <ol id="log" class="log"></ol>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="js/demo.js"></script>
+</body>
+</html>

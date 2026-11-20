@@ -1,0 +1,13 @@
+{
+  "name": "session-recording",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Records the network calls a page makes in the browser and stores them in a database.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server.js"
+  }
+}

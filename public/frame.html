@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Same-origin frame</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="frame-body">
+  <p>Same-origin iframe. It makes its own calls:</p>
+  <img src="/mock/pixel.gif?from=frame-markup" alt="">
+  <script>
+    // Runs before the parent can hook this window: still captured, via buffered timing entries.
+    fetch('/mock/json?id=frame-early');
+    // Runs after the parent hooked this window: captured with method, status and initiator.
+    setTimeout(function () {
+      fetch('/mock/echo?from=frame-late', { method: 'POST', body: 'hi' });
+      new Image().src = '/mock/pixel.gif?from=frame-script';
+    }, 1500);
+  </script>
+</body>
+</html>
